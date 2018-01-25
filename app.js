@@ -8,12 +8,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var cors = require('cors')
+var database = require('./modules/database');
+
 
 /**
  * ROUTE
  */
 var index = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/api/users');
 
 /**
  * START
@@ -21,10 +24,18 @@ var users = require('./routes/users');
 var app = express();
 
 /**
+ * CORS
+ */
+app.use(cors({
+  origin: 'http://localhost:8080',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}))
+
+/**
  * APP USE
  */
 // view engine setup
-app.set('views', ['client/dist']);
+app.set('views', ['client/dist', 'client']);
 // To render HTML file
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
@@ -39,17 +50,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api/users', users);
 
 /**
  * DATABASE
  */
-var db = mongoose.connection;
-db.on('error', console.error.bind('DB : connection ERROR'));
-db.once('open', function() {
-  console.error.bind('DB : connection OK');
-});
-
+database.openConnection()
 /**
  * ERROR
  */

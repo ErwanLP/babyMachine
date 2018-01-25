@@ -1,0 +1,5 @@
+{
+  "restartable": "rs",
+  "verbose": true,
+  "ignore": ["node_modules/*", "client/*",".git"]
+}

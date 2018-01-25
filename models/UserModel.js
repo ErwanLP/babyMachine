@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 var schema = new mongoose.Schema(
     {
         trigram  :  String,
-        firstName: String,
-        lastName : String
+        email: String,
+        firstName : String,
+        lastName : String,
+        password : String
 
     }
 );

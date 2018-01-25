@@ -25,13 +25,18 @@ module.exports.create = function (MongooseModel, object, hydrateFn) {
     return new Promise(function (resolve, reject) {
         var newDoc = new MongooseModel();
         newDoc = hydrateFn(newDoc, object);
-        newDoc.save(function (err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(newDoc);
-            }
-        });
+        try{
+            newDoc.save(function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(newDoc);
+                }
+            });
+        } catch (e){
+            reject(e);
+        }
+
     })
 };
 
