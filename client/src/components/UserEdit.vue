@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     submit: function () {
-      var url ='/api/users'
+      var url = '/api/users'
       if (this.user._id) {
         url += '/' + this.user._id
       }
