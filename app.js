@@ -17,6 +17,8 @@ var database = require('./modules/database');
  */
 var index = require('./routes/index');
 var users = require('./routes/api/users');
+var teams = require('./routes/api/teams');
+var tournaments = require('./routes/api/tournaments');
 
 /**
  * START
@@ -51,6 +53,8 @@ app.use(express.static(path.join(__dirname, 'client/dist')));
 
 app.use('/', index);
 app.use('/api/users', users);
+app.use('/api/teams', teams);
+app.use('/api/tournaments', tournaments);
 
 /**
  * DATABASE

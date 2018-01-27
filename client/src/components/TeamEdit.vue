@@ -18,7 +18,7 @@
                                disabled>
                     </div>
                 </div>
-                <Player v-for="(playerObject, i) in team.players" :key="i" :player-object="playerObject"></Player>
+                <Player v-for="(playerObject, i) in team.players" :key="i" :player-object="playerObject" :team-id="team.id || 'newTeam'" :users="users"></Player>
                 -----------------
                 Team Player : {{team.players}}
                 <div class="form-group row">
@@ -27,7 +27,6 @@
                     </div>
                 </div>
             </form>
-            {{team}}
         </div>
     </div>
 </template>
@@ -58,20 +57,33 @@
                     .catch(error => {
                         console.log(error)
                     })
-            for (var i = 0; i < this.team.number; i++) {
+            for (let i = 0; i < this.team.number; i++) {
                 this.team.players.push({
                     player : {},
                     isManager : false
                 })
             }
+          if (this.$route.params) {
+            var id = this.$route.params.id
+          }
+          if (id) {
+            axios.get('/api/teams/' + id)
+              .then(response => {
+                console.log(response)
+                this.team = response.data
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }
         },
         methods: {
             submit: function () {
-                var url = '/api/team'
-                if (this.user._id) {
-                    url += '/' + this.user._id
+                let url = '/api/teams'
+                if (this.team._id) {
+                    url += '/' + this.team._id
                 }
-                axios.post(url, this.user)
+                axios.post(url, this.team)
                         .then(function (response) {
                             console.log(response)
                         })

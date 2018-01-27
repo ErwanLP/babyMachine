@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-var UserModel = require('./UserModel');
+let UserModel = require('./UserModel');
 
 
-var schema = new mongoose.Schema(
+let schema = new mongoose.Schema(
     {
         name  :  String,
         players: [{
-                player : {type:mongoose.Schema.ObjectId, ref: 'UserModel'},
+                player : {type:mongoose.Schema.ObjectId, ref: 'User'},
+                isManager : Boolean,
         }],
 
     }

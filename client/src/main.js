@@ -11,6 +11,21 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    dateToShortISOString: function (string) {
+      let date = new Date(string)
+      function pad (number) {
+        if (number < 10) {
+          return '0' + number
+        }
+        return number
+      }
+      return date.getUTCFullYear() + '-' + pad(date.getUTCMonth() + 1) + '-' + pad(date.getUTCDate())
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

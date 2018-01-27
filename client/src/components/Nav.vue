@@ -17,6 +17,9 @@
           <a class="nav-link" href="#/teams">Equipes</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="#/tournaments">Tournois</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="#/signin">Inscription</a>
         </li>
         <li class="nav-item">

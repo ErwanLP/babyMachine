@@ -1,6 +1,20 @@
 module.exports.find = function (MongooseModel, conditionObject) {
     return new Promise(function (resolve, reject) {
-        MongooseModel.find(conditionObject).exec(function (err, list) {
+        MongooseModel.find(conditionObject)            .exec(function (err, list) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(list)
+            }
+        });
+    });
+};
+
+module.exports.findWithPopulate = function (MongooseModel, conditionObject, populate) {
+    return new Promise(function (resolve, reject) {
+        MongooseModel.find(conditionObject)
+            .populate(populate)
+            .exec(function (err, list) {
             if (err) {
                 reject(err);
             } else {
@@ -13,6 +27,20 @@ module.exports.find = function (MongooseModel, conditionObject) {
 module.exports.findOne = function (MongooseModel, query) {
     return new Promise(function (resolve, reject) {
         MongooseModel.findOne(query).exec(function (err, object) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(object)
+            }
+        });
+    });
+};
+
+module.exports.findOneWithPopulate = function (MongooseModel, query, populate) {
+    return new Promise(function (resolve, reject) {
+        MongooseModel.findOne(query)
+            .populate(populate)
+            .exec(function (err, object) {
             if (err) {
                 reject(err);
             } else {
