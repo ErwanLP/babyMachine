@@ -5,7 +5,6 @@ var CommonService = require('./CommonService');
 function hydrate(bean, data) {
         bean.name = data.name;
         bean.startDate = data.startDate;
-        bean.players = data.players;
         return bean;
 }
 

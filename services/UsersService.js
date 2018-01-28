@@ -1,8 +1,6 @@
 var User = require('../models/UserModel');
 var CommonService = require('./CommonService');
 
-
-
 function hydrate(bean, data) {
         bean.trigram = data.trigram;
         bean.email = data.email;
@@ -26,4 +24,8 @@ module.exports.find = function () {
 
 module.exports.updateOne = function (id, object) {
     return CommonService.updateOne(User, id, object, hydrate);
+};
+
+module.exports.remove = function (id, object) {
+    return CommonService.remove(User, id, object, hydrate);
 };

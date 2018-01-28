@@ -8,6 +8,7 @@ import 'bootstrap'
 
 import 'font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css'
 
 Vue.config.productionTip = false
 

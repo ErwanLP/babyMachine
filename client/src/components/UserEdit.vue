@@ -1,57 +1,63 @@
 <template >
   <div  class="container">
-    <div class="row"><h2>User Edit</h2>
-    </div>
-    <div class="row">
-      <form>
-        <div class="form-group row">
-          <label for="inputTrigram" class="col-sm-4 col-form-label">Trigram</label>
-          <div class="col-sm-6">
-            <input type="text" v-model="user.trigram"  class="form-control" id="inputTrigram" placeholder="Trigram">
-          </div>
+      <div class="card center-card">
+        <div class="card-body">
+          <h5 class="card-title">Edition d'un utilisateur</h5>
+          <hr>
+          <form>
+            <div class="form-group">
+              <label for="inputTrigram">Trigrame</label>
+              <input type="text" v-model="user.trigram" class="form-control" id="inputTrigram">
+            </div>
+            <div class="form-group">
+              <label for="inputEmail">Email</label>
+              <input type="text" v-model="user.email" class="form-control" id="inputEmail">
+            </div>
+            <div class="form-group">
+              <label for="inputFirstName">Prénom</label>
+              <input type="text" v-model="user.firstName" class="form-control" id="inputFirstName">
+            </div>
+            <div class="form-group">
+              <label for="inputLastName">Nom</label>
+              <input type="text" v-model="user.lastName" class="form-control" id="inputLastName">
+            </div>
+            <div class="form-group">
+              <label for="inputPassword">Mot de passe</label>
+              <input type="password" v-model="user.lastName" class="form-control" id="inputPassword">
+            </div>
+            <hr>
+            <div class="form-group row"  style="text-align: center">
+              <div class="col-sm-4">
+                <a href="#/users"><button type="button" class="btn btn-secondary">Annuler</button></a>
+              </div>
+              <div class="col-sm-4">
+                <button v-on:click="displayDeleteButton = !displayDeleteButton" type="button" class="btn btn-danger">Supprimer</button>
+              </div>
+              <div class="col-sm-4">
+                <button v-on:click="saveUser()" class="btn btn-primary">Sauvegarder</button>
+              </div>
+            </div>
+            <div class="center-button" v-if="displayDeleteButton">
+              <div class=" alert alert-danger" role="alert">
+                 <button v-on:click="deleteUser()" type="button" class="btn btn-danger">Confirmer la suppression</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="form-group row">
-          <label for="inputEmail" class="col-sm-4 col-form-label">Email</label>
-          <div class="col-sm-6">
-            <input type="email" v-model="user.email" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputFirstName" class="col-sm-4 col-form-label">FirstName</label>
-          <div class="col-sm-6">
-            <input type="text" v-model="user.firstName" class="form-control" id="inputFirstName" placeholder="FirstName">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputLastName" class="col-sm-4 col-form-label">LastName</label>
-          <div class="col-sm-6">
-            <input type="text" v-model="user.lastName" class="form-control" id="inputLastName" placeholder="LastName">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputPassword" class="col-sm-4 col-form-label">Password</label>
-          <div class="col-sm-6">
-            <input type="password" v-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-6">
-            <button v-on:click="submit()" class="btn btn-primary">Save</button>
-          </div>
-        </div>
-      </form>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
 
 import axios from '@/utils/axios'
+import router from '@/router'
 
 export default {
   name: 'UserEdit',
   data () {
     return {
+      displayDeleteButton : false,
       user : {
         id : null,
         trigram : null,
@@ -63,33 +69,47 @@ export default {
     }
   },
   created () {
+    let id
     if (this.$route.params) {
-      var id = this.$route.params.id
+      id = this.$route.params.id
     }
     if (id) {
       axios.get('/api/users/' + id)
               .then(response => {
-                console.log(response)
                 this.user = response.data
               })
               .catch(error => {
-                console.log(error)
+                console.error(error)
               })
     }
   },
   methods: {
-    submit: function () {
-      var url = '/api/users'
+    saveUser: function () {
+      let url = '/api/users'
       if (this.user._id) {
         url += '/' + this.user._id
       }
       axios.post(url, this.user)
-              .then(function (response) {
-                console.log(response)
+              .then(response => {
+                router.push({ path: '/users' })
               })
-              .catch(function (error) {
-                console.log(error)
+              .catch(error => {
+                console.error(error)
               })
+    },
+    deleteUser: function () {
+      if (this.user._id) {
+        let url = '/api/users/' + this.user._id
+        axios.delete(url)
+          .then(response => {
+            router.push({ path: '/users' })
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      } else {
+        router.push({ path: '/users' })
+      }
     }
   }
 }

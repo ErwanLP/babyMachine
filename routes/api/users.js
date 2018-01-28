@@ -15,6 +15,18 @@ router.get('/', function (req, res, next) {
     })
 });
 
+/* POST users . */
+router.post('/', function (req, res, next) {
+    return UsersService.create(req.body).then(
+        function (data) {
+            res.send(data)
+        }
+    ).catch(function (e) {
+        res.status(500);
+        next(e);
+    })
+});
+
 /* GET user by ID. */
 router.get('/:id', function (req, res, next) {
     return UsersService.findOne(req.params.id).then(
@@ -28,9 +40,9 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
-/* POST users . */
-router.post('/', function (req, res, next) {
-    return UsersService.create(req.body).then(
+/* UPDATE user by ID . */
+router.post('/:id', function (req, res, next) {
+    return UsersService.updateOne(req.params.id,req.body).then(
         function (data) {
             res.send(data)
         }
@@ -40,9 +52,9 @@ router.post('/', function (req, res, next) {
     })
 });
 
-/* UPDATE user by ID . */
-router.post('/:id', function (req, res, next) {
-    return UsersService.updateOne(req.params.id,req.body).then(
+/* Delete user by ID . */
+router.delete('/:id', function (req, res, next) {
+    return UsersService.remove(req.params.id).then(
         function (data) {
             res.send(data)
         }
