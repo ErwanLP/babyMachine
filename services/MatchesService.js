@@ -4,7 +4,7 @@ let CommonService = require('./CommonService');
 
 function hydrate(bean, data) {
     bean.teams = data.teams;
-    bean.tournamentId = data.tournamentId;
+    bean.tournament = data.tournament;
     bean.numberOfTeam = data.numberOfTeam;
     return bean;
 }
@@ -14,12 +14,38 @@ module.exports.create = function (object) {
 };
 
 module.exports.findOne = function (id) {
-    return CommonService.findOneWithPopulate(Match, {_id: id}, 'teams.team');
+    return new Promise(function (resolve, reject) {
+        Match.findOne({_id: id})
+            .populate({
+                path : 'teams.team',
+                populate : ({
+                    path: 'players.player'
+                })
 
+            })
+            .exec(function (err, list) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(list)
+                }
+            });
+    });
 };
 
 module.exports.find = function () {
-    return CommonService.find(Match, {});
+    return new Promise(function (resolve, reject) {
+        Match.find({})
+            .populate('teams.team')
+            .populate('tournament', 'name')
+            .exec(function (err, list) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(list)
+                }
+            });
+    });
 };
 
 module.exports.updateOne = function (id, object) {

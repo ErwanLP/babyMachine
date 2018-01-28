@@ -8,7 +8,7 @@ let schema = new mongoose.Schema(
                 team : {type:mongoose.Schema.ObjectId, ref: 'Team'},
                 score : Number,
         }],
-        tournamentId : {type:mongoose.Schema.ObjectId, ref: 'Tournament'},
+        tournament : {type:mongoose.Schema.ObjectId, ref: 'Tournament'},
         numberOfTeam : Number
     }
 );

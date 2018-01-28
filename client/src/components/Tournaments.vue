@@ -11,16 +11,16 @@
               <button type="button" class="btn btn-outline btn-sm">
                 <i class="fa fa-plus" aria-hidden="true"></i></button></a></th>
             <th>Nom</th>
-            <th>Edition</th>
             <th>Inscription</th>
+            <th>Edition</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="(tournament, index) in tournaments"  :key="tournament._id">
             <th scope="row">#{{ index }}</th>
             <td>{{ tournament.name }}</td>
-            <td><a v-bind:href="'#/tournament/'+tournament._id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
             <td><button v-on:click="selectedTournament = tournament" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistrationTournament"> Inscription  </button></td>
+            <td><a v-bind:href="'#/tournament/'+tournament._id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
           </tr>
           </tbody>
         </table>

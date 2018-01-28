@@ -1,6 +1,7 @@
-var express = require('express');
-var TournamentsService = require('../../services/TournamentsService')
-var router = express.Router();
+let express = require('express');
+let TournamentsService = require('../../services/TournamentsService')
+let TournamentController = require('../../controllers/TournamentController')
+let router = express.Router();
 
 /* GET tournament listing. */
 router.get('/', function (req, res, next) {
@@ -55,6 +56,18 @@ router.post('/:id', function (req, res, next) {
 /* UPDATE tournament by ID . */
 router.post('/:id/registration', function (req, res, next) {
     return TournamentsService.registration(req.params.id,req.body).then(
+        function (data) {
+            res.send(data)
+        }
+    ).catch(function (e) {
+        res.status(500);
+        next(e);
+    })
+});
+
+/* UPDATE tournament by ID . */
+router.post('/:id/generateMatches', function (req, res, next) {
+    return TournamentController.generateMatches(req.params.id,req.body).then(
         function (data) {
             res.send(data)
         }

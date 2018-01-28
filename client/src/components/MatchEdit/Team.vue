@@ -2,9 +2,8 @@
   <div class="form-row">
     <div class="form-group  col-md-6">
       <label for="selectPlayerOne">Equipe n°{{number}}</label>
-      {{teamObject.team.name}}
       <select v-model="teamObject.team" class="form-control" id="selectPlayerOne">
-        <option v-for="(team) in teams" :key="team._id" :value="team">{{team.name}}</option>
+        <option v-for="(currentTeam) in teams" :key="currentTeam._id" :value="currentTeam">{{currentTeam.name}}</option>
       </select>
     </div>
     <div class="form-group  col-md-6">

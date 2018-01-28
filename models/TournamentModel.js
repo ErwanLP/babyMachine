@@ -11,5 +11,5 @@ var schema = new mongoose.Schema(
     }
 );
 schema.set('versionKey', false);
-module.exports = mongoose.model('Tournaments', schema);
+module.exports = mongoose.model('Tournament', schema);
 

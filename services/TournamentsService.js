@@ -61,4 +61,4 @@ module.exports.registration = function (id, data) {
             }
         });
     });
-};
+}

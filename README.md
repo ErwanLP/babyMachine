@@ -8,3 +8,5 @@ Soft Delete User
 Soft Delete Team
 Select user plus fin (pas mettre le mot de pass)
 crypter le mot de passe
+varaible pour activer/desactiver inscription sur un tournoi
+login
