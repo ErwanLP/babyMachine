@@ -19,6 +19,7 @@ var index = require('./routes/index');
 var users = require('./routes/api/users');
 var teams = require('./routes/api/teams');
 var tournaments = require('./routes/api/tournaments');
+var matches = require('./routes/api/matches');
 
 /**
  * START
@@ -29,7 +30,7 @@ var app = express();
  * CORS
  */
 app.use(cors({
-  origin: 'http://localhost:8082',
+  origin: 'http://localhost:8080',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }))
 
@@ -55,6 +56,7 @@ app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/teams', teams);
 app.use('/api/tournaments', tournaments);
+app.use('/api/matches', matches);
 
 /**
  * DATABASE

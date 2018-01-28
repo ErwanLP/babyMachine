@@ -20,11 +20,9 @@
           <a class="nav-link" href="#/tournaments">Tournois</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/signin">Inscription</a>
+          <a class="nav-link" href="#/matches">Matches</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/login">Connection</a>
-        </li>
+
       </ul>
     </div>
   </nav>

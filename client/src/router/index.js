@@ -8,6 +8,8 @@ import Teams from '@/components/Teams'
 import TeamEdit from '@/components/TeamEdit'
 import Tournaments from '@/components/Tournaments'
 import TournamentEdit from '@/components/TournamentEdit'
+import Matches from '@/components/Matches'
+import MatchEdit from '@/components/MatchEdit'
 
 Vue.use(Router)
 
@@ -69,6 +71,22 @@ export default new Router({
       path: '/tournament/:id',
       name: 'TournamentEdit',
       component: TournamentEdit,
+      props : true
+    },
+    {
+      path: '/matches',
+      name: 'Matches',
+      component: Matches
+    },
+    {
+      path: '/match/create',
+      name: 'MatchCreate',
+      component: MatchEdit
+    },
+    {
+      path: '/match/:id',
+      name: 'MatchEdit',
+      component: MatchEdit,
       props : true
     }
   ]

@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
               <label for="inputPassword">Mot de passe</label>
-              <input type="password" v-model="user.lastName" class="form-control" id="inputPassword">
+              <input type="password" v-model="user.password" class="form-control" id="inputPassword">
             </div>
             <hr>
             <div class="form-group row"  style="text-align: center">

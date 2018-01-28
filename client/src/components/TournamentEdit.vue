@@ -15,9 +15,14 @@
           </div>
           <hr>
           <ul class="list-group">
-            <li  v-for="(teamObject) in tournament.teams" class="list-group-item">
-              {{teamObject.team.name}}
-            </li>
+            <a class="list-group-item"  v-for="(teamObject) in tournament.teams" :key="teamObject._id" style="background-color: #d3d3d338; border-bottom: 3px solid white;">
+              <i class="fa fa-users" aria-hidden="true"></i>
+              <div class="bmd-list-group-col">
+                <p class="list-group-item-heading">{{teamObject.team.name}}</p>
+                <p class="list-group-item-text">{{getPlayerNameInTeam(teamObject.team)}}</p>
+              </div>
+              <i class="fa fa-trash pull-xs-right"></i>
+            </a>
           </ul>
           <hr>
           <div class="form-group row"  style="text-align: center">
@@ -102,6 +107,13 @@ export default {
       } else {
         router.push({ path: '/tournaments' })
       }
+    },
+    getPlayerNameInTeam: function (team) {
+      let string = ''
+      team.players.forEach(playerObject => {
+        string += playerObject.player.trigram + ' '
+      })
+      return string
     }
   }
 }

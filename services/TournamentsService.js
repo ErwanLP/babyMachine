@@ -3,9 +3,9 @@ var CommonService = require('./CommonService');
 
 
 function hydrate(bean, data) {
-        bean.name = data.name;
-        bean.startDate = data.startDate;
-        return bean;
+    bean.name = data.name;
+    bean.startDate = data.startDate;
+    return bean;
 }
 
 module.exports.create = function (object) {
@@ -13,11 +13,27 @@ module.exports.create = function (object) {
 };
 
 module.exports.findOne = function (id) {
-    return CommonService.findOneWithPopulate(Tournament, {_id: id},  'teams.team');
+    return new Promise(function (resolve, reject) {
+        Tournament.findOne({_id: id})
+            .populate({
+                path : 'teams.team',
+                populate : ({
+                    path: 'players.player'
+                })
+
+            })
+            .exec(function (err, list) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(list)
+                }
+            });
+    });
 };
 
 module.exports.find = function () {
-    return CommonService.find(Tournament, {}) ;
+    return CommonService.find(Tournament, {});
 };
 
 module.exports.updateOne = function (id, object) {
@@ -27,11 +43,11 @@ module.exports.registration = function (id, data) {
     return new Promise(function (resolve, reject) {
         Tournament.findOne({_id: id}, function (err, doc) {
             if (doc) {
-                if(!doc.teams){
+                if (!doc.teams) {
                     doc.teams = [];
                 }
                 doc.teams.push({
-                    team : data.selectedTeam
+                    team: data.selectedTeam
                 });
                 doc.save(function (err) {
                     if (err) {
@@ -40,8 +56,9 @@ module.exports.registration = function (id, data) {
                         resolve(doc);
                     }
                 })
-            } else{
-                reject({message : 'document not found'})
+            } else {
+                reject({message: 'document not found'})
             }
         });
-    });};
+    });
+};
