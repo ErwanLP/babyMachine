@@ -78,7 +78,7 @@
         })
       }
       // GET TEAM
-      let id;
+      let id
       if (this.$route.params) {
         id = this.$route.params.id
       }

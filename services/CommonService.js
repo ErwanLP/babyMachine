@@ -81,7 +81,7 @@ module.exports.updateOne = function (MongooseModel, id, object, hydrateFn) {
                     }
                 })
             } else{
-                reject({message : 'User not found'})
+                reject({message : 'document not found'})
             }
         });
     });

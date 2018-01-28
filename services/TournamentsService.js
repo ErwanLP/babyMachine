@@ -13,13 +13,35 @@ module.exports.create = function (object) {
 };
 
 module.exports.findOne = function (id) {
-    return CommonService.findOneWithPopulate(Tournament, {_id: id},  'players.player');
+    return CommonService.findOneWithPopulate(Tournament, {_id: id},  'teams.team');
 };
 
 module.exports.find = function () {
-    return CommonService.findWithPopulate(Tournament, {}, 'players.player');
+    return CommonService.find(Tournament, {}) ;
 };
 
 module.exports.updateOne = function (id, object) {
     return CommonService.updateOne(Tournament, id, object, hydrate);
 };
+module.exports.registration = function (id, data) {
+    return new Promise(function (resolve, reject) {
+        Tournament.findOne({_id: id}, function (err, doc) {
+            if (doc) {
+                if(!doc.teams){
+                    doc.teams = [];
+                }
+                doc.teams.push({
+                    team : data.selectedTeam
+                });
+                doc.save(function (err) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(doc);
+                    }
+                })
+            } else{
+                reject({message : 'document not found'})
+            }
+        });
+    });};

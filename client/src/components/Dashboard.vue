@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <div class="card" style="width: 25rem;">
-          <img class="card-img-top" height="220" src="./../assets/trophy.jpg" alt="Card image cap">
+        <div class="card" style="width: 100%; max-width: 18rem">
+          <img class="card-img-top"  height="220" src="./../assets/trophy.jpg" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">Tounoi en cours</h5>
           </div>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="card" style="width: 25rem;">
+        <div class="card" style="width: 100%;">
           <div class="card-body">
             <h5 class="card-title">Get started</h5>
           </div>

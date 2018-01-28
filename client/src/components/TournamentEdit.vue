@@ -14,9 +14,15 @@
             <input type="date" v-model="tournament.startDate" class="form-control" id="inputStartDate">
           </div>
           <hr>
+          <ul class="list-group">
+            <li  v-for="(teamObject) in tournament.teams" class="list-group-item">
+              {{teamObject.team.name}}
+            </li>
+          </ul>
+          <hr>
           <div class="form-group row"  style="text-align: center">
             <div class="col-sm-4">
-              <a href="#/users"><button type="button" class="btn btn-secondary">Annuler</button></a>
+              <a href="#/tournaments"><button type="button" class="btn btn-secondary">Annuler</button></a>
             </div>
             <div class="col-sm-4">
               <button v-on:click="displayDeleteButton = !displayDeleteButton" type="button" class="btn btn-danger">Supprimer</button>
