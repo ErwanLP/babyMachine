@@ -14,6 +14,18 @@ router.get('/', function (req, res, next) {
         next(e);
     })
 });
+/* GET tournament listing. */
+router.get('/byTournamentId/:id', function (req, res, next) {
+    return MatchesService.byTournamentId(req.params.id).then(
+        data => {
+            "use strict";
+            res.send(data)
+        }
+    ).catch(function (e) {
+        res.status(500);
+        next(e);
+    })
+});
 
 /* GET tournament by ID. */
 router.get('/:id', function (req, res, next) {

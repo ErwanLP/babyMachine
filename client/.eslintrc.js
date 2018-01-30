@@ -24,7 +24,12 @@ module.exports = {
   rules: {
     // remove indentation rules
     "indent": 0,
+    "semi" : 0,
+    "keyword-spacing" : 0,
+    'space-before-blocks' : 0,
     "key-spacing" : 0,
+    "space-before-function-paren " :0,
+    "arrow-spacing " : 0,
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development

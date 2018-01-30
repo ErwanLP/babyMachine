@@ -20,7 +20,7 @@ export default {
 <style>
 
   body {
-    background-color: lightblue;
+    background-color: lightblue !important;
   }
 
   .center-card{

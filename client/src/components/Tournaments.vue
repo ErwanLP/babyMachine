@@ -18,7 +18,7 @@
           <tbody>
           <tr v-for="(tournament, index) in tournaments"  :key="tournament._id">
             <th scope="row">#{{ index }}</th>
-            <td>{{ tournament.name }}</td>
+            <td><a  v-bind:href="'#/tournament/'+tournament._id + '/dashboard'">{{ tournament.name }}</a></td>
             <td><button v-on:click="selectedTournament = tournament" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistrationTournament"> Inscription  </button></td>
             <td><a v-bind:href="'#/tournament/'+tournament._id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
           </tr>

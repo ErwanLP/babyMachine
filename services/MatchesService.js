@@ -48,6 +48,25 @@ module.exports.find = function () {
     });
 };
 
+module.exports.byTournamentId = function (id) {
+    return new Promise(function (resolve, reject) {
+        Match.find({tournament : id})
+            .populate('teams.team')
+            .exec(function (err, list) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(list)
+                }
+            });
+    });
+};
+
 module.exports.updateOne = function (id, object) {
     return CommonService.updateOne(Match, id, object, hydrate);
 };
+
+module.exports.setScore = function (id, object) {
+    return CommonService.updateOne(Match, id, object, hydrateScore);
+};
+

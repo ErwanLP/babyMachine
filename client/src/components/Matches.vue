@@ -14,6 +14,7 @@
             <th>Equipe 0</th>
             <th>Equipe 1</th>
             <th>Edition</th>
+            <th>Score</th>
           </tr>
           </thead>
           <tbody>
@@ -23,6 +24,7 @@
             <td>{{ getTeamLabel(match.teams[0]) }}</td>
             <td>{{ getTeamLabel(match.teams[1]) }}</td>
             <td><a v-bind:href="'#/match/'+match._id"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+            <td><a v-bind:href="'#/match/'+match._id+'/score'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
           </tr>
           </tbody>
         </table>
@@ -64,7 +66,7 @@ export default {
   methods: {
     getTeamLabel : function (teamObject) {
       if (teamObject && teamObject.team) {
-        return teamObject.team.name + (teamObject.score ? ' [ ' + teamObject.score + ' ] ' : '')
+        return teamObject.team.name + (!isNaN(teamObject.score) ? ' [ ' + teamObject.score + ' ] ' : '')
       }
     },
     getTournamentLabel : function (match) {

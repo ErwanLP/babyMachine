@@ -7,6 +7,7 @@ let schema = new mongoose.Schema(
         teams: [{
                 team : {type:mongoose.Schema.ObjectId, ref: 'Team'},
                 score : Number,
+                winner : Boolean,
         }],
         tournament : {type:mongoose.Schema.ObjectId, ref: 'Tournament'},
         numberOfTeam : Number
