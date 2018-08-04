@@ -1,0 +1,17 @@
+
+{
+  "name": "BabyMachine",
+  "short_name": "BabyMachine",
+  "icons": [
+    {
+      "src": "/static/main-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#ADD8E6",
+  "theme_color": "#ADD8E6"
+}
